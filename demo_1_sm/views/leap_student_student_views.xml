@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- FORM -->
+    <record id="view_leap_student_student_form" model="ir.ui.view">
+        <field name="name">view.leap.student.student.form</field>
+        <field name="model">leap.student.student</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <header>
+                    <button name="method_find_age" type="object" string="Find Age" class="oe_highlight"/>
+                    <button name="get_record_ids" type="object" string="Get Record Ids"/>
+                    <button name="action_search_count" type="object" string="Search Count"/>
+                </header>
+
+                <sheet>
+                    <!-- ADD SMART BUTTON -->
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_result_of_student" type="object" class="oe_stat_button"
+                                icon="fa-list-alt" attrs="{'invisible':[('result_count','=',0)]}">
+                            <field name="result_count" widget="statinfo" string="Results"/>
+                        </button>
+                    </div>
+
+                    <field name="student_image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="student_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_name"/>
+                            <field name="date_of_birth"/>
+                            <field name="age" readonly="1"/>
+                        </group>
+
+                        <group>
+                            <field name="student_mobile"/>
+                            <field name="student_email"/>
+                            <field name="gender"/>
+                        </group>
+
+                        <group>
+                            <field name="class_id"/>
+                            <field name="result_count" attrs="{'invisible':[('result_count','=',0)]}"/>
+                        </group>
+
+                        <group>
+                            <field name="student_date_of_birth"/>
+                            <field name="student_age" readonly="1"/>
+                        </group>
+
+                        <group>
+                            <field name="subject_ids" widget="many2many_tags"/>
+                        </group>
+
+
+                    </group>
+
+                    <notebook>
+                        <page string="Result" attrs="{'invisible':[('result_count','=',0)]}">
+                            <field name="result_line" readonly="1">
+                                <tree editable="bottom">
+                                    <field name="number" readonly="1"/>
+                                    <field name="total" readonly="1"/>
+                                    <field name="percentage" readonly="1"/>
+                                </tree>
+
+                                <form>
+                                    <group>
+                                        <field name="number" readonly="1"/>
+                                        <field name="total" readonly="1"/>
+                                        <field name="percentage" readonly="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE -->
+    <record id="view_leap_student_student_tree" model="ir.ui.view">
+        <field name="name">view.leap.student.student.tree</field>
+        <field name="model">leap.student.student</field>
+        <field name="arch" type="xml">
+            <tree string="Students">
+                <field name="id"/>
+                <field name="student_id"/>
+                <field name="result_count"/>
+                <field name="student_name"/>
+                <field name="class_id"/>
+                <field name="date_of_birth"/>
+                <field name="age"/>
+                <field name="student_date_of_birth"/>
+                <field name="student_age"/>
+                <field name="gender"/>
+                <field name="student_mobile"/>
+                <field name="student_email"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- KANBAN VIEW -->
+    <record id="view_leap_student_student_kanban" model="ir.ui.view">
+        <field name="name">view.leap.student.student.kanban</field>
+        <field name="model">leap.student.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="student_name"/>
+                <field name="class_id"/>
+                <field name="date_of_birth"/>
+                <field name="gender"/>
+                <field name="student_mobile"/>
+                <field name="student_email"/>
+                <field name="student_image"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+
+                            <!-- For Display Image -->
+                            <div class="o_kanban_image me-1">
+                                <img t-att-src="kanban_image('leap.student.student', 'student_image',record.id.raw_value)"
+                                     alt="Student" class="o_image_64_contain"/>
+                            </div>
+
+                            <!-- For Display Information -->
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    Name :
+                                    <field name="student_name"/>
+                                </strong>
+
+                                <div t-if="record.class_id.value">
+                                    Class :
+                                    <t t-esc="record.class_id.value"/>
+                                </div>
+
+                                <div t-if="record.date_of_birth.value">
+                                    Date of Birth :
+                                    <t t-esc="record.date_of_birth.value"/>
+                                </div>
+
+                                <div t-if="record.gender.value">
+                                    Gender :
+                                    <t t-esc="record.gender.value"/>
+                                </div>
+
+                                <div t-if="record.student_mobile.value">
+                                    Mobile :
+                                    <t t-esc="record.student_mobile.value"/>
+                                </div>
+
+                                <div t-if="record.student_email.value">
+                                    Email :
+                                    <t t-esc="record.student_email.value"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW-->
+    <record id="view_leap_student_student_search" model="ir.ui.view">
+        <field name="name">view.leap.student.student.search</field>
+        <field name="model">leap.student.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="student_name"/>
+                <field name="class_id"/>
+                <field name="student_email"/>
+
+                <!-- FILTERS -->
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+
+                <!-- GROUP BY -->
+                <group>
+                    <filter name="gender" string="Gender" context="{'group_by': 'gender'}"/>
+                    <filter name="class" string="Class" context="{'group_by': 'class_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for male students -->
+    <record id="action_leap_male_student" model="ir.actions.act_window">
+        <field name="name">Male</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leap.student.student</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'default_gender':'male','default_class_id': 1, 'search_default_filter_male': 1,
+            'search_default_class': 1}
+        </field>
+        <field name="domain">[('gender', '=', 'male')]</field>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Action for female students -->
+    <record id="action_leap_female_student" model="ir.actions.act_window">
+        <field name="name">Female</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leap.student.student</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'default_gender':'female', 'default_class_id': 3, 'search_default_filter_female': 1,
+            'search_default_class': 1}
+        </field>
+        <field name="domain">[('gender', '=', 'female')]</field>
+    </record>
+
+    <!-- Action for all students -->
+    <record id="action_leap_all_student" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leap.student.student</field>
+        <field name="context">{'search_default_filter_male': 1, 'search_default_class': 1}</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <!-- Main Menu (Student)-->
+    <menuitem id="sub_menu_leap_student"
+              name="Student"
+              sequence="2"
+              parent="main_menu_leap_school_main"/>
+
+    <!-- Sub Menu (Male) -->
+    <menuitem id="sub_menu_leap_male_student"
+              name="Male"
+              sequence="2"
+              parent="sub_menu_leap_student"
+              action="action_leap_male_student"/>
+
+    <!-- Sub Menu (Female) -->
+    <menuitem id="sub_menu_leap_female_student"
+              name="Female"
+              sequence="3"
+              parent="sub_menu_leap_student"
+              action="action_leap_female_student"/>
+
+    <!-- Sub Menu (All) -->
+    <menuitem id="sub_menu_leap_all_student"
+              name="All"
+              sequence="4"
+              parent="sub_menu_leap_student"
+              action="action_leap_all_student"/>
+
+    <!-- Menu for wizard -->
+    <menuitem id="sub_menu_create_student"
+              name="Add Student"
+              sequence="5"
+              parent="sub_menu_leap_student"
+              action="action_create_student"/>
+</odoo>

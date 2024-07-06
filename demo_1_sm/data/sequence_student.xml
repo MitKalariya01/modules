@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!--Sequence for School Student-->
+        <record id="seq_school_student" model="ir.sequence">
+            <field name="name">Sequence Student</field>
+            <field name="code">leap.student.student</field> <!-- Give a proper name here,You can give model name itself or other name whatever you like-->
+            <field name="prefix">Stud</field> <!--Starting of sequence-->
+            <field name="padding">3</field> <!-- Total digits -->
+            <field name="company_id" eval="False"/> <!-- company_id eval="False" means sequence is common for all the companies -->
+        </record>
+    </data>
+</odoo>

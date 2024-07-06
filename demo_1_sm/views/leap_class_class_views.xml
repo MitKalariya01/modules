@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- FORM -->
+    <record id="view_leap_class_class_form" model="ir.ui.view">
+        <field name="name">view.leap.class.class.form</field>
+        <field name="model">leap.class.class</field>
+        <field name="arch" type="xml">
+            <form string="Class">
+                <sheet>
+
+<!--                    CODE OF ADD SMART BUTTON IN THE SHEET-->
+
+                    <!-- ADD SMART BUTTON -->
+<!--                    <div class="oe_button_box" name="button_box">-->
+<!--                        <button name="action_view_student_detail" type="object" class="oe_stat_button"-->
+<!--                                icon="fa-users" attrs="{'invisible':[('student_count','=',0)]}">-->
+<!--                            <field name="student_count" widget="statinfo" string="Students Count"/>-->
+<!--                        </button>-->
+<!--                    </div>-->
+
+
+                    <div class="oe_button_box" name="button_box">
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="class_name"/>
+                            <field name="student_count"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Students" attrs="{'invisible':[('student_count','=',0)]}">
+                            <field name="class_student"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE -->
+    <record id="view_leap_class_class_tree" model="ir.ui.view">
+        <field name="name">view.leap.class.class.tree</field>
+        <field name="model">leap.class.class</field>
+        <field name="arch" type="xml">
+            <tree string="Classes">
+                <field name="class_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_leap_class" model="ir.actions.act_window">
+        <field name="name">Class</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leap.class.class</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sub_menu_leap_class"
+              name="Class"
+              sequence="3"
+              parent="main_menu_leap_school_main"
+              action="action_leap_class"/>
+</odoo>

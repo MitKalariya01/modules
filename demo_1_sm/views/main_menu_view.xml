@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="main_menu_leap_school_main"
+          name="School"
+          sequence="5"/>
+
+    <menuitem id="sub_menu_leap_setting"
+              name="Setting"
+              sequence="5"
+              parent="main_menu_leap_school_main"/>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_leap_student_student_all,access.leap.student.student.all,model_leap_student_student,,1,1,1,1
+access_leap_class_class_all,access.leap.class.class.all,model_leap_class_class,,1,1,1,1
+access_leap_subject_subject_all,access.leap.subject.subject.all,model_leap_subject_subject,,1,1,1,1
+access_leap_result_result_all,access.leap.result.result.all,model_leap_result_result,,1,1,1,1
+access_leap_result_lines_all,access.leap.result.lines.all,model_leap_result_lines,,1,1,1,1
+access_create_student_wizard_all,access.create.student.wizard.all,model_create_student_wizard,,1,1,1,1

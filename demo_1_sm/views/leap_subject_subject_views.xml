@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- FORM -->
+    <record id="view_leap_subject_subject_form" model="ir.ui.view">
+        <field name="name">view.leap.subject.subject.form</field>
+        <field name="model">leap.subject.subject</field>
+        <field name="arch" type="xml">
+            <form string="Subject">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="subject_name"/>
+                            <field name="reference"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="Result">
+                            <field name="result_lines">
+                                <tree name="Result">
+                                    <field name="result_id"/>
+                                    <field name="subject_marks"/>
+                                </tree>
+
+                                <form name="Result">
+                                    <group>
+                                        <field name="result_id"/>
+                                        <field name="subject_marks"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TREE -->
+    <record id="view_leap_subject_subject_tree" model="ir.ui.view">
+        <field name="name">view.leap.subject.subject.tree</field>
+        <field name="model">leap.subject.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Subject">
+                <field name="subject_name"/>
+                <field name="reference"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_leap_subject" model="ir.actions.act_window">
+        <field name="name">Subject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">leap.subject.subject</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="sub_menu_leap_subject"
+              name="Subject"
+              sequence="6"
+              parent="sub_menu_leap_setting"
+              action="action_leap_subject"/>
+</odoo>

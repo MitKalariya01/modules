@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- FORM VIEW-->
+    <record id="view_create_student_wizard_form" model="ir.ui.view">
+        <field name="name">view.create.student.wizard.form</field>
+        <field name="model">create.student.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add New Student">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_of_birth"/>
+                            <field name="age" readonly="1"/>
+                            <field name="mobile"/>
+                            <field name="email"/>
+                            <field name="gender"/>
+                            <field name="class_id"/>
+                        </group>
+                    </group>
+                </sheet>
+
+                <footer>
+                    <button name="button_action_create_student" type="object" string="Create" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_multi_select_new_admission" model="ir.actions.act_window">
+        <field name="name">Test</field>
+        <field name="res_model">create.student.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_create_student_wizard_form"/>
+        <field name="binding_model_id" ref="model_leap_student_student"/>
+        <field name="target">new</field>
+    </record>
+
+    <!-- ACTION-->
+    <record id="action_create_student" model="ir.actions.act_window">
+        <field name="name">Create Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">create.student.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
